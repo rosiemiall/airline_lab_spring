@@ -26,7 +26,7 @@ public class DataLoader implements ApplicationRunner{
     public void run(ApplicationArguments args) throws Exception {
 
 
-        Flight flight1 = new Flight("Paris",100,"7/11/23","12:00");
+        Flight flight1 = new Flight("Paris",1,"7/11/23","12:00");
         flightRepository.save(flight1);
         Flight flight2 = new Flight("New York",150,"7/11/23","14:00");
         flightRepository.save(flight2);

@@ -2,6 +2,7 @@ package com.example.airline_api.controllers;
 
 import com.example.airline_api.models.Flight;
 import com.example.airline_api.models.Passenger;
+import com.example.airline_api.models.PassengerDTO;
 import com.example.airline_api.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,11 @@ public class FlightController {
 
     // Display all available flights - DONE
     @GetMapping
-    public ResponseEntity<List<Flight>> getAllFlights(){
+    public ResponseEntity<List<Flight>> getAllFlights(
+            @RequestParam(required=false, name = "destination")String destination){
+        if(destination != null){
+            return new ResponseEntity<>(flightService.findByDestination(destination), HttpStatus.OK);
+        }
         return new ResponseEntity<>(flightService.displayAll(), HttpStatus.OK);
     }
 
@@ -39,8 +44,10 @@ public class FlightController {
     // Book passenger on a flight - DONE may need refactoring with bookings class
     @PatchMapping(value = "/{id}")
     public ResponseEntity<Flight> addPassengerToFlight(@PathVariable Long id,
-                                                       @RequestBody Long passengerId){
-        flightService.bookPassenger(id, passengerId);
+                                                       @RequestBody PassengerDTO passengerDTO){
+//        Passenger passenger = new Passenger(passengerDTO.getName(), passengerDTO.getEmail());
+//        passenger.setFlights(passengerDTO.getFlights());
+        flightService.bookPassenger(id, passengerDTO.getPassengerID());
         return new ResponseEntity<>(flightService.displayById(id), HttpStatus.OK);
     }
 

@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,9 +44,22 @@ public class FlightService {
     @Transactional
     public void bookPassenger(Long flightId, Long passengerId){
         Flight flight = flightRepository.findById(flightId).get();
-        Passenger passenger = passengerService.displayById(passengerId);
-        passenger.bookFlight(flight);
-        flight.addPassenger(passenger);
+        if(flight.getCapacity()>flight.getPassengers().size()){
+            Passenger passenger = passengerService.displayById(passengerId);
+            passenger.bookFlight(flight);
+            flight.addPassenger(passenger);
+        }
+
+    }
+
+    public List<Flight> findByDestination(String destination){
+        ArrayList filteredFlights = new ArrayList<Flight>();
+        for (Flight flight: flightRepository.findAll()) {
+            if (flight.getDestination().equals(destination)){
+                filteredFlights.add(flight);
+            }
+        }
+        return filteredFlights;
     }
 
 }
