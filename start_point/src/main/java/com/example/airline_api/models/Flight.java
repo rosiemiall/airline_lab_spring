@@ -40,6 +40,10 @@ public class Flight {
     public Flight() {
     }
 
+    public void addPassenger(Passenger passenger){
+        this.passengers.add(passenger);
+    }
+
     public long getId() {
         return id;
     }

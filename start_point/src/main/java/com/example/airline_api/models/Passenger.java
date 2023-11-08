@@ -35,6 +35,12 @@ public class Passenger {
 
     public Passenger() {
     }
+    public void bookFlight(Flight flight){
+        this.flights.add(flight);
+    }
+    public void cancelFlight(Flight flight){
+        this.flights.remove(flight);
+    }
 
     public long getId() {
         return id;
