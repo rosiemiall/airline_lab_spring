@@ -1,9 +1,12 @@
 package com.example.airline_api.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 //import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +23,10 @@ public class Flight {
     @Column
     private int capacity;
     @Column(name = "departure_date")
+//    @JsonFormat(pattern="yyyy-MM-dd")
     private String departureDate;
     @Column(name = "departure_time")
+//    @JsonFormat(pattern="HH-mm-ss")
     private String departureTime;
 
 

@@ -10,6 +10,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Component
 public class DataLoader implements ApplicationRunner{
 
@@ -26,9 +29,13 @@ public class DataLoader implements ApplicationRunner{
     public void run(ApplicationArguments args) throws Exception {
 
 
-        Flight flight1 = new Flight("Paris",1,"7/11/23","12:00");
+//        Flight flight1 = new Flight("Paris",1, LocalDate.of(2023, 11, 7),
+//                LocalTime.of(12, 00, 00));
+        Flight flight1 = new Flight("Paris", 1, "07/11/23", "12:00:00");
         flightRepository.save(flight1);
-        Flight flight2 = new Flight("New York",150,"7/11/23","14:00");
+//        Flight flight2 = new Flight("New York",150, LocalDate.of(2023, 11, 8),
+//                LocalTime.of(11, 00, 00));
+        Flight flight2 = new Flight("New York", 50, "08/11/23", "11:00:00");
         flightRepository.save(flight2);
 
         Passenger passenger1 = new Passenger("Rosie", "rosie@email.com");
@@ -38,6 +45,3 @@ public class DataLoader implements ApplicationRunner{
 
     }
 }
-
-
-//implements ApplicationRunner
